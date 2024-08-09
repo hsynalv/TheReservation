@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace API.Domain.Entity.Identity
 {
-    public class AppUser
+    public class AppUser : IdentityUser<string>
     {
-        public class User
-        {
-
-        }
+        public DateTime CreatedDate { get; set; }
     }
 }

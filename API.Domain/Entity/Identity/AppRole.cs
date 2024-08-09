@@ -1,6 +1,8 @@
-﻿namespace API.Domain.Entity.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class AppRole
+namespace API.Domain.Entity.Identity;
+
+public class AppRole : IdentityRole<string>
 {
 
 }
