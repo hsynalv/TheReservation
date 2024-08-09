@@ -21,6 +21,8 @@ namespace API.Persistence.Context
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Dish> Dishes { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

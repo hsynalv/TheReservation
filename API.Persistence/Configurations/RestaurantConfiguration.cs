@@ -42,5 +42,10 @@ public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
             .WithOne(rv => rv.Restaurant)
             .HasForeignKey(rv => rv.RestaurantId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(r => r.Menu) // One-to-One Relationship with Menu
+            .WithOne(m => m.Restaurant)
+            .HasForeignKey<Menu>(m => m.RestaurantId)
+            .OnDelete(DeleteBehavior.Cascade); // Optional: Cascade delete when Restaurant is deleted
     }
 }
