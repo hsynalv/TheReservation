@@ -28,6 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Repositories\User\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>
 
