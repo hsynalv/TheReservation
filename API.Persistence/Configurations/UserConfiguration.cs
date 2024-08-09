@@ -13,17 +13,9 @@ namespace API.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            // Property configurations
-            builder.Property(u => u.UserName)
-                .IsRequired()
-                .HasMaxLength(100);
 
-            builder.Property(u => u.Email)
-                .IsRequired()
-                .HasMaxLength(150);
-
-            builder.Property(u => u.PhoneNumber)
-                .HasMaxLength(15);
+            builder.Property(u => u.ProfilePicture);
+            builder.Property(u => u.Score);
 
             // Relationships
             builder.HasMany(u => u.Reservations)
