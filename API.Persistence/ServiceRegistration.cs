@@ -3,12 +3,14 @@ using API.Application_.Repositories.Menu;
 using API.Application_.Repositories.Reservation;
 using API.Application_.Repositories.Restaurant;
 using API.Application_.Repositories.Review;
+using API.Domain.Entity.Identity;
 using API.Persistence.Context;
 using API.Persistence.Repositories.Dish;
 using API.Persistence.Repositories.Menu;
 using API.Persistence.Repositories.Reservation;
 using API.Persistence.Repositories.Restaurant;
 using API.Persistence.Repositories.Review;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +24,16 @@ namespace API.Persistence
             services.AddDbContext<APIDbContext>(options =>
                 options.UseSqlServer(Configuration.ConnectionString));
 
+            services.AddIdentity<AppUser, AppRole>(options =>
+                {
+                    options.Password.RequiredLength = 3;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                }).AddEntityFrameworkStores<APIDbContext>()
+                .AddDefaultTokenProviders();
+
 
 
             services.AddScoped<IReservationReadRepository, ReservationReadRepository>();
@@ -30,7 +42,7 @@ namespace API.Persistence
             services.AddScoped<IRestaurantWriteRepository, RestaurantWriteRepository>();
             services.AddScoped<IReviewReadRepository, ReviewReadRepository>();
             services.AddScoped<IReviewWriteRepository, ReviewWriteRepository>();
-            services.AddScoped<IMenuReadRepository, IMenuReadRepository>();
+            services.AddScoped<IMenuReadRepository, MenuReadRepository>();
             services.AddScoped<IMenuWriteRepository, MenuWriteRepository>();
             services.AddScoped<IDishReadRepository, DishReadRepository>();
             services.AddScoped<IDishWriteRepository, DishWriteRepository>();

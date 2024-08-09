@@ -1,3 +1,4 @@
+using API.Application_;
 using API.Persistence;
 using API.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Service Registration
 builder.Services.AddPersistenceServices();
+builder.Services.AddApplicationServices();
 
 
 
