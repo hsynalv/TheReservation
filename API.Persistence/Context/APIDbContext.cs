@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using API.Domain.Entity;
+using API.Domain.Entity.Common;
 using API.Domain.Entity.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,21 @@ namespace API.Persistence.Context
 
             modelBuilder.Entity<User>()
                 .ToTable("Users");
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is BaseEntity && e.State == EntityState.Added);
+
+            foreach (var entityEntry in entries)
+            {
+                ((BaseEntity)entityEntry.Entity).CreatedDate = DateTime.UtcNow;
+                ((BaseEntity)entityEntry.Entity).Id = Guid.NewGuid().ToString();
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }
