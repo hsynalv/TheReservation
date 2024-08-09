@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{4A15A9C0-336F-4908-AAF6-B0F53281D15A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Application,", "API.Application,\API.Application,.csproj", "{1731E834-A4E1-4282-B56C-2F3423D61553}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Application", "API.Application,\API.Application.csproj", "{1731E834-A4E1-4282-B56C-2F3423D61553}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Domain", "API.Domain\API.Domain.csproj", "{ACC8A75C-C038-414A-937D-A339CC5A6199}"
 EndProject
