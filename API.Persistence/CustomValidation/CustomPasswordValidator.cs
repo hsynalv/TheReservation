@@ -1,5 +1,6 @@
 ﻿using API.Domain.Entity.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace API.Persistence.CustomValidation
                 errors.Add(new IdentityError
                 {
                     Code = "PasswordContainsUserName",
-                    Description = "Password cannot contain username"
+                    Description = "Parola kullanıcı adı içeremez!"
                 });
             }
 
@@ -27,7 +28,7 @@ namespace API.Persistence.CustomValidation
                 errors.Add(new IdentityError
                 {
                     Code = "PasswordContains12345",
-                    Description = "Password cannot contain 12345"
+                    Description = "Parola ardışık değerler içeremez!"
                 });
             }
 
@@ -36,7 +37,7 @@ namespace API.Persistence.CustomValidation
                 errors.Add(new IdentityError
                 {
                     Code = "PasswordContainsEmail",
-                    Description = "Password cannot contain E-mail address"
+                    Description = "Parola e-posta adresi içeremez!"
                 });
             }
 
