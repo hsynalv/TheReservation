@@ -5,6 +5,7 @@ using API.Application_.Repositories.Restaurant;
 using API.Application_.Repositories.Review;
 using API.Domain.Entity.Identity;
 using API.Persistence.Context;
+using API.Persistence.CustomValidation;
 using API.Persistence.Repositories.Dish;
 using API.Persistence.Repositories.Menu;
 using API.Persistence.Repositories.Reservation;
@@ -26,12 +27,18 @@ namespace API.Persistence
 
             services.AddIdentity<AppUser, AppRole>(options =>
                 {
+                    options.User.RequireUniqueEmail = true;
+                    options.User.AllowedUserNameCharacters = "abcçdefgðhiýjklmnoöpqrsþtuüvwxyzABCÇDEFGHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789-._";
+
+
                     options.Password.RequiredLength = 3;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
-                }).AddEntityFrameworkStores<APIDbContext>()
+                }).AddPasswordValidator<CustomPasswordValidator>()
+                .AddUserValidator<CustomUserValidator>()
+                .AddEntityFrameworkStores<APIDbContext>()
                 .AddDefaultTokenProviders();
 
 
@@ -48,5 +55,7 @@ namespace API.Persistence
             services.AddScoped<IDishWriteRepository, DishWriteRepository>();
 
         }
+
+
     }
 }
