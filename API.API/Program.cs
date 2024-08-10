@@ -1,3 +1,4 @@
+using API.API.Extensions;
 using API.Application_;
 using API.Infrastructure;
 using API.Persistence;
@@ -52,7 +53,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+// Global Exception Handler
+app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>());
 
 app.MapControllers();
 
