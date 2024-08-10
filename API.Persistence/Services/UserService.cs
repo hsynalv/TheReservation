@@ -12,7 +12,6 @@ public class UserService : IUserService
     {
         _userManager = userManager;
     }
-
     public async Task<CreateUserResponseDto> CreateAsync(CreateUserDto model)
     {
         IdentityResult result = await _userManager.CreateAsync(new()
@@ -32,4 +31,13 @@ public class UserService : IUserService
 
         return response;
     }
+
+    public async Task UpdateRefreshToken(string refreshToken, AppUser user, DateTime accessTokenDate, int addOnAccessTokenDate)
+    {
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenEndDate = accessTokenDate.AddSeconds(addOnAccessTokenDate).ToLocalTime();
+        IdentityResult result = await _userManager.UpdateAsync(user);
+    }
+
+
 }
