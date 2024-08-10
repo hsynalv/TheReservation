@@ -1,4 +1,4 @@
-﻿using API.Application_.Abstractions;
+﻿using API.Application_.Abstractions.Token;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;

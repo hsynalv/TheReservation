@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using API.Application_.Abstractions;
+using API.Application_.Abstractions.Token;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,7 +20,7 @@ namespace API.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public Application_.DTOs.Token CreateAccessToken(int minute)
+        public Application_.DTOs.Token CreateAccessToken(int second)
         {
             Application_.DTOs.Token token = new();
 
@@ -31,7 +31,7 @@ namespace API.Infrastructure.Services
             SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
             //Oluşturulacak token ayarlarını veriyoruz.
-            token.Expiration = DateTime.UtcNow.AddMinutes(minute);
+            token.Expiration = DateTime.UtcNow.AddSeconds(second); // Todo burayı daha sonra minute olarak değiştir.
             JwtSecurityToken securityToken = new(
                 audience: _configuration["Token:Audience"],
                 issuer: _configuration["Token:Issuer"],

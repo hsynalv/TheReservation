@@ -1,4 +1,6 @@
-﻿using API.Application_.Exceptions;
+﻿using API.Application_.Abstractions.Services;
+using API.Application_.DTOs.User;
+using API.Application_.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -6,31 +8,29 @@ namespace API.Application_.Features.Command.AppUser.CreateUser;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
 {
-    readonly UserManager<Domain.Entity.Identity.AppUser> _userManager;
+    readonly IUserService _userService;
 
-    public CreateUserCommandHandler(UserManager<Domain.Entity.Identity.AppUser> userManager)
+    public CreateUserCommandHandler(IUserService userService)
     {
-        _userManager = userManager;
+        _userService = userService;
     }
 
     public async Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
     {
-        IdentityResult result = await _userManager.CreateAsync(new()
+
+        CreateUserResponseDto response =  await _userService.CreateAsync(new()
         {
-            Id = Guid.NewGuid().ToString(),
-            UserName = request.UserName,
             Email = request.Email,
-        }, request.Password);
+            Password = request.Password,
+            UserName = request.UserName
+        });
+            
 
-        if (result.Succeeded)
+        // TODO: Hatalı giriş olsa bile 200 kodu dönüyor.
+        return new()
         {
-            return new()
-            {
-                Succeeded = true,
-                Message = "Kullanıcı başarıyla oluşturuldu..."
-            };
-        }
-
-        throw new UserCreateFailedException();
+            Message = response.Message,
+            Succeeded = response.Succeeded
+        };
     }
 }

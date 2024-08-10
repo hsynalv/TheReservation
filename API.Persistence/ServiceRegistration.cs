@@ -1,4 +1,6 @@
-﻿using API.Application_.Repositories.Dish;
+﻿using API.Application_.Abstractions.Services;
+using API.Application_.Abstractions.Services.Authentication;
+using API.Application_.Repositories.Dish;
 using API.Application_.Repositories.Menu;
 using API.Application_.Repositories.Reservation;
 using API.Application_.Repositories.Restaurant;
@@ -11,6 +13,7 @@ using API.Persistence.Repositories.Menu;
 using API.Persistence.Repositories.Reservation;
 using API.Persistence.Repositories.Restaurant;
 using API.Persistence.Repositories.Review;
+using API.Persistence.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +43,11 @@ namespace API.Persistence
                 .AddUserValidator<CustomUserValidator>()
                 .AddEntityFrameworkStores<APIDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IExternalAuthentication, AuthService>();
+            services.AddScoped<IInternalAuthentication, AuthService>();
 
 
 

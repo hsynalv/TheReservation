@@ -23,14 +23,14 @@ namespace API.Persistence.CustomValidation
                 });
             }
 
-            if (password.ToLower().Contains("12345"))
-            {
-                errors.Add(new IdentityError
-                {
-                    Code = "PasswordContains12345",
-                    Description = "Parola ardışık değerler içeremez!"
-                });
-            }
+            //if (password.ToLower().Contains("12345")) // TODO: Burayı aç
+            //{
+            //    errors.Add(new IdentityError
+            //    {
+            //        Code = "PasswordContains12345",
+            //        Description = "Parola ardışık değerler içeremez!"
+            //    });
+            //}
 
             if (password.ToLower().Contains(user.Email.ToLower()))
             {
