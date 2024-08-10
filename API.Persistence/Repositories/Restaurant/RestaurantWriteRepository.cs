@@ -4,7 +4,7 @@ using API.Persistence.Context;
 
 namespace API.Persistence.Repositories.Restaurant
 {
-    public class RestaurantWriteRepository: WriteRepository<Domain.Entity.Restaurant>, IRestaurantWriteRepository
+    public class RestaurantWriteRepository: WriteRepository<Domain.Entities.Restaurant>, IRestaurantWriteRepository
     {
         public RestaurantWriteRepository(APIDbContext context) : base(context)
         {

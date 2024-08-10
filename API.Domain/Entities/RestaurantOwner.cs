@@ -1,6 +1,6 @@
-﻿using API.Domain.Entity.Identity;
+﻿using API.Domain.Entities.Identity;
 
-namespace API.Domain.Entity;
+namespace API.Domain.Entities;
 
 public class RestaurantOwner : AppUser
 {

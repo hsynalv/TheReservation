@@ -8,7 +8,7 @@ using API.Persistence.Context;
 
 namespace API.Persistence.Repositories.Dish
 {
-    public class DishReadRepository : ReadRepository<Domain.Entity.Dish>, IDishReadRepository
+    public class DishReadRepository : ReadRepository<Domain.Entities.Dish>, IDishReadRepository
     {
         public DishReadRepository(APIDbContext context) : base(context)
         {

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using API.Domain.Entity;
-using API.Domain.Entity.Common;
-using API.Domain.Entity.Identity;
+using API.Domain.Entities;
+using API.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -5,7 +5,7 @@ using API.Application_.Repositories.Menu;
 using API.Application_.Repositories.Reservation;
 using API.Application_.Repositories.Restaurant;
 using API.Application_.Repositories.Review;
-using API.Domain.Entity.Identity;
+using API.Domain.Entities.Identity;
 using API.Persistence.Context;
 using API.Persistence.CustomValidation;
 using API.Persistence.Repositories.Dish;

@@ -1,10 +1,10 @@
-﻿using API.Domain.Entity.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Domain.Entities.Common;
 
 namespace API.Application_.Repositories
 {

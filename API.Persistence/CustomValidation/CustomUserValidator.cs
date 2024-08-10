@@ -1,4 +1,4 @@
-﻿using API.Domain.Entity.Identity;
+﻿using API.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace API.Persistence.CustomValidation;

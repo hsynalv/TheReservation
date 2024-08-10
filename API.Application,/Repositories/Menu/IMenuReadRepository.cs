@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Application_.Repositories.Menu
 {
-    public interface IMenuReadRepository : IReadRepository<Domain.Entity.Menu>
+    public interface IMenuReadRepository : IReadRepository<Domain.Entities.Menu>
     {
     }
 }

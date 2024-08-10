@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using API.Domain.Entity.Identity;
+﻿using API.Domain.Entities.Identity;
 
-namespace API.Domain.Entity
+namespace API.Domain.Entities
 {
     public class User : AppUser 
     {

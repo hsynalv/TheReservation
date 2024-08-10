@@ -1,7 +1,6 @@
 ﻿using API.Application_.Abstractions.Token;
 using API.Application_.DTOs;
 using API.Application_.Exceptions;
-using API.Domain.Entity.Identity;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Application_.Abstractions.Services;
+using API.Domain.Entities.Identity;
 
 namespace API.Persistence.Services
 {

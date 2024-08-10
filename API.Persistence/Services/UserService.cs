@@ -1,13 +1,13 @@
 ﻿using API.Application_.Abstractions.Services;
 using API.Application_.DTOs.User;
-using API.Domain.Entity.Identity;
+using API.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace API.Persistence.Services;
 
 public class UserService : IUserService
 {
-    readonly UserManager<Domain.Entity.Identity.AppUser> _userManager;
+    readonly UserManager<AppUser> _userManager;
     public UserService(UserManager<AppUser> userManager)
     {
         _userManager = userManager;

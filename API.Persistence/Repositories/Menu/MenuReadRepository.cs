@@ -9,7 +9,7 @@ using API.Application_.Repositories.Menu;
 
 namespace API.Persistence.Repositories.Menu
 {
-    public class MenuReadRepository : ReadRepository<Domain.Entity.Menu>, IMenuReadRepository
+    public class MenuReadRepository : ReadRepository<Domain.Entities.Menu>, IMenuReadRepository
     {
         public MenuReadRepository(APIDbContext context) : base(context)
         {

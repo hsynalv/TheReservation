@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Application_.Repositories.Restaurant
 {
-    public interface IRestaurantWriteRepository: IWriteRepository<Domain.Entity.Restaurant>
+    public interface IRestaurantWriteRepository: IWriteRepository<Domain.Entities.Restaurant>
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Application_.Repositories.Dish
 {
-    public interface IDishWriteRepository : IWriteRepository<Domain.Entity.Dish>
+    public interface IDishWriteRepository : IWriteRepository<Domain.Entities.Dish>
     {
     }
 }

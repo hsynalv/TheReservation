@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Application_.Repositories.Reservation
 {
-    public interface IReservationReadRepository : IReadRepository<Domain.Entity.Reservation>
+    public interface IReservationReadRepository : IReadRepository<Domain.Entities.Reservation>
     {
     }
 }

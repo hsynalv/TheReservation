@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using API.Application_.Repositories;
-using API.Domain.Entity.Common;
+using API.Domain.Entities.Common;
 using API.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 

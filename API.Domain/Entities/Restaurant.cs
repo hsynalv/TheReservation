@@ -1,6 +1,6 @@
-﻿using API.Domain.Entity.Common;
+﻿using API.Domain.Entities.Common;
 
-namespace API.Domain.Entity;
+namespace API.Domain.Entities;
 
 public class Restaurant : BaseEntity
 {

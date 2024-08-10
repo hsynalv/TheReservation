@@ -4,7 +4,7 @@ using API.Persistence.Context;
 
 namespace API.Persistence.Repositories.Review;
 
-public class ReviewReadRepository : ReadRepository<Domain.Entity.Review>, IReviewReadRepository
+public class ReviewReadRepository : ReadRepository<Domain.Entities.Review>, IReviewReadRepository
 {
     public ReviewReadRepository(APIDbContext context) : base(context)
     {

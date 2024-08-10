@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Application_.Repositories.Review
 {
-    public interface IReviewWriteRepository: IWriteRepository<Domain.Entity.Review>
+    public interface IReviewWriteRepository: IWriteRepository<Domain.Entities.Review>
     {
     }
 }

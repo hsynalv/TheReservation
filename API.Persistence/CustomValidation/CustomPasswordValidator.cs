@@ -1,11 +1,11 @@
-﻿using API.Domain.Entity.Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Domain.Entities.Identity;
 
 namespace API.Persistence.CustomValidation
 {
