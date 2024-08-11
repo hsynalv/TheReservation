@@ -36,7 +36,7 @@ namespace API.Infrastructure.Services
             // Claim'leri ekliyoruz
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, username),  // Kullanıcı adını Claim olarak ekliyoruz
+                new Claim(JwtRegisteredClaimNames.Sub, username), // Kullanıcı adını Claim olarak ekliyoruz
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Token ID'si (benzersiz)
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()) // Token'ın oluşturulma zamanı
             };
@@ -46,7 +46,7 @@ namespace API.Infrastructure.Services
             JwtSecurityToken securityToken = new(
                 audience: _configuration["Token:Audience"],
                 issuer: _configuration["Token:Issuer"],
-                claims:claims,
+                claims: claims,
                 expires: token.Expiration,
                 notBefore: DateTime.UtcNow,
                 signingCredentials: signingCredentials
@@ -70,3 +70,5 @@ namespace API.Infrastructure.Services
         }
     }
 }
+
+    

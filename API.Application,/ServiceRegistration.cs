@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using API.Application_.Abstractions.Services;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Application_
@@ -9,6 +10,8 @@ namespace API.Application_
         {
             services.AddMediatR(typeof(ServiceRegistration));
             services.AddHttpClient();
+
+            
         }
     }
 }

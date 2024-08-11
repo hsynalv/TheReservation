@@ -2,6 +2,7 @@
 using API.Application_.Features.Command.AppUser.CreateUser;
 using API.Application_.Features.Command.AppUser.GoogleLogin;
 using API.Application_.Features.Command.AppUser.LoginUser;
+using API.Application_.Features.Command.AppUser.UpdatePassword;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,14 @@ namespace API.API.Controllers
         {
             ChangePasswordCommandResponse result = await _mediator.Send(request);
             return Ok(result);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> ResetPassword(
+            [FromBody] UpdatePasswordCommandRequest updatePasswordCommandRequest)
+        {
+            UpdatePasswordCommandResponse response = await _mediator.Send(updatePasswordCommandRequest);
+            return Ok(response);
         }
 
         

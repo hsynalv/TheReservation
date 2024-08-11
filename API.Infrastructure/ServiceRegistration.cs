@@ -1,4 +1,6 @@
-﻿using API.Application_.Abstractions.Token;
+﻿using API.Application_.Abstractions.Services;
+using API.Application_.Abstractions.Token;
+using API.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -15,6 +17,7 @@ namespace API.Infrastructure
         public static void AddInfrastructureServices(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<ITokenHandler, TokenHandler>();
+            serviceCollection.AddScoped<IMailService, MailService>();
         }
     }
 }
