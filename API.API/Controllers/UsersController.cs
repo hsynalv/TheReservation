@@ -1,4 +1,5 @@
-﻿using API.Application_.Features.Command.AppUser.CreateUser;
+﻿using API.Application_.Features.Command.AppUser.ChangePassword;
+using API.Application_.Features.Command.AppUser.CreateUser;
 using API.Application_.Features.Command.AppUser.GoogleLogin;
 using API.Application_.Features.Command.AppUser.LoginUser;
 using MediatR;
@@ -16,6 +17,13 @@ namespace API.API.Controllers
         {
             _mediator = mediator;
 
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordCommandRequest request)
+        {
+            ChangePasswordCommandResponse result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         

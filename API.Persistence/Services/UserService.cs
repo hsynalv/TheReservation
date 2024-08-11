@@ -1,5 +1,7 @@
-﻿using API.Application_.Abstractions.Services;
+﻿using System.Reflection.Metadata.Ecma335;
+using API.Application_.Abstractions.Services;
 using API.Application_.DTOs.User;
+using API.Application_.Exceptions;
 using API.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
@@ -39,5 +41,24 @@ public class UserService : IUserService
         IdentityResult result = await _userManager.UpdateAsync(user);
     }
 
+    public async Task<bool> ChangePassword(AppUser user, string currentPassword, string newPassword)
+    {
+       bool checkPassword = await _userManager.CheckPasswordAsync(user, currentPassword);
+       if (!checkPassword)
+           throw new Exception("Mevcut Şifrenizi Hatalı Girdiniz...");
 
+       IdentityResult result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+       
+       if (result.Succeeded)
+           return true;
+       return false;
+    }
+
+    public async Task<AppUser> GetUser(string username)
+    {
+        AppUser user = await _userManager.FindByNameAsync(username);
+        if (user == null)
+            throw new UserNotFoundException("Kullanıcı adı bulunamadı");
+        return user;
+    }
 }
