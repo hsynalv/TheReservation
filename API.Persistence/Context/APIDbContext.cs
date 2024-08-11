@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using API.Domain.Entities;
+using API.Domain.Entities.Common;
 using API.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -31,12 +32,8 @@ namespace API.Persistence.Context
 
             // Assembly'deki tüm IEntityTypeConfiguration implementasyonlarını uygula
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            modelBuilder.Entity<RestaurantOwner>()
-                .ToTable("RestaurantOwners");
-
-            modelBuilder.Entity<User>()
-                .ToTable("Users");
         }
+
+        
     }
 }

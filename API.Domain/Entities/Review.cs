@@ -10,6 +10,6 @@ public class Review : BaseEntity
     public string RestaurantId { get; set; }
 
     // Navigation Properties
-    public User? User { get; set; }
+    public Customer? User { get; set; }
     public Restaurant? Restaurant { get; set; }
 }

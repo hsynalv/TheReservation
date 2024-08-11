@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\User\**" />
+    <EmbeddedResource Remove="Repositories\User\**" />
+    <None Remove="Repositories\User\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\API.Domain\API.Domain.csproj" />
   </ItemGroup>
 
@@ -19,10 +25,6 @@
 		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Repositories\User\" />
 	</ItemGroup>
 
 </Project>

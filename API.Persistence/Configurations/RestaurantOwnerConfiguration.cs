@@ -8,14 +8,8 @@ public class RestaurantOwnerConfiguration : IEntityTypeConfiguration<RestaurantO
 {
     public void Configure(EntityTypeBuilder<RestaurantOwner> builder)
     {
-
-        // Property configurations
-        builder.Property(ro => ro.Email)
-            .IsRequired()
-            .HasMaxLength(150);
-
-        builder.Property(ro => ro.PhoneNumber)
-            .HasMaxLength(15);
+        // Primary Key
+        builder.HasKey(ro => ro.Id);
 
         // Relationships
         builder.HasMany(ro => ro.Restaurants)

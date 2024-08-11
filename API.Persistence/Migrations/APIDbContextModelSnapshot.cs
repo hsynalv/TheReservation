@@ -22,6 +22,28 @@ namespace API.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("API.Domain.Entities.Customer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Score")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers", (string)null);
+                });
+
             modelBuilder.Entity("API.Domain.Entities.Dish", b =>
                 {
                     b.Property<string>("Id")
@@ -105,9 +127,8 @@ namespace API.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -130,8 +151,7 @@ namespace API.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -162,9 +182,7 @@ namespace API.Persistence.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.UseTptMappingStrategy();
+                    b.ToTable("AppUsers", (string)null);
                 });
 
             modelBuilder.Entity("API.Domain.Entities.Menu", b =>
@@ -269,6 +287,22 @@ namespace API.Persistence.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Restaurants", (string)null);
+                });
+
+            modelBuilder.Entity("API.Domain.Entities.RestaurantOwner", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RestaurantOwner");
                 });
 
             modelBuilder.Entity("API.Domain.Entities.Review", b =>
@@ -413,24 +447,15 @@ namespace API.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("API.Domain.Entities.RestaurantOwner", b =>
+            modelBuilder.Entity("API.Domain.Entities.Customer", b =>
                 {
-                    b.HasBaseType("API.Domain.Entities.Identity.AppUser");
+                    b.HasOne("API.Domain.Entities.Identity.AppUser", "AppUser")
+                        .WithOne("Customer")
+                        .HasForeignKey("API.Domain.Entities.Customer", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.ToTable("RestaurantOwners", (string)null);
-                });
-
-            modelBuilder.Entity("API.Domain.Entities.User", b =>
-                {
-                    b.HasBaseType("API.Domain.Entities.Identity.AppUser");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Score")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.ToTable("Users", (string)null);
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("API.Domain.Entities.Dish", b =>
@@ -463,7 +488,7 @@ namespace API.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Domain.Entities.User", "User")
+                    b.HasOne("API.Domain.Entities.Customer", "User")
                         .WithMany("Reservations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -485,6 +510,17 @@ namespace API.Persistence.Migrations
                     b.Navigation("Owner");
                 });
 
+            modelBuilder.Entity("API.Domain.Entities.RestaurantOwner", b =>
+                {
+                    b.HasOne("API.Domain.Entities.Identity.AppUser", "AppUser")
+                        .WithOne("RestaurantOwner")
+                        .HasForeignKey("API.Domain.Entities.RestaurantOwner", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("API.Domain.Entities.Review", b =>
                 {
                     b.HasOne("API.Domain.Entities.Restaurant", "Restaurant")
@@ -493,7 +529,7 @@ namespace API.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Domain.Entities.User", "User")
+                    b.HasOne("API.Domain.Entities.Customer", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -555,21 +591,19 @@ namespace API.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Domain.Entities.RestaurantOwner", b =>
+            modelBuilder.Entity("API.Domain.Entities.Customer", b =>
                 {
-                    b.HasOne("API.Domain.Entities.Identity.AppUser", null)
-                        .WithOne()
-                        .HasForeignKey("API.Domain.Entities.RestaurantOwner", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Reservations");
+
+                    b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("API.Domain.Entities.User", b =>
+            modelBuilder.Entity("API.Domain.Entities.Identity.AppUser", b =>
                 {
-                    b.HasOne("API.Domain.Entities.Identity.AppUser", null)
-                        .WithOne()
-                        .HasForeignKey("API.Domain.Entities.User", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.Navigation("Customer")
+                        .IsRequired();
+
+                    b.Navigation("RestaurantOwner")
                         .IsRequired();
                 });
 
@@ -590,13 +624,6 @@ namespace API.Persistence.Migrations
             modelBuilder.Entity("API.Domain.Entities.RestaurantOwner", b =>
                 {
                     b.Navigation("Restaurants");
-                });
-
-            modelBuilder.Entity("API.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Reservations");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,5 +7,9 @@ namespace API.Domain.Entities.Identity
         public DateTime CreatedDate { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenEndDate { get; set; }
+
+        // Navigation Properties
+        public Customer Customer { get; set; }
+        public RestaurantOwner RestaurantOwner { get; set; }
     }
 }

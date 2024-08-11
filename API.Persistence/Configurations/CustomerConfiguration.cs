@@ -9,21 +9,25 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Persistence.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Customer> builder)
         {
+            // Table name and primary key configuration
+            builder.ToTable("Customers");
+            builder.HasKey(c => c.Id);
 
-            builder.Property(u => u.ProfilePicture);
-            builder.Property(u => u.Score);
+            // Properties configuration
+            builder.Property(c => c.ProfilePicture);
+            builder.Property(c => c.Score);
 
             // Relationships
-            builder.HasMany(u => u.Reservations)
+            builder.HasMany(c => c.Reservations)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(u => u.Reviews)
+            builder.HasMany(c => c.Reviews)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade);

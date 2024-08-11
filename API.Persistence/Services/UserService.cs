@@ -16,7 +16,7 @@ public class UserService : IUserService
     {
         IdentityResult result = await _userManager.CreateAsync(new()
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = model.id,
             UserName = model.UserName,
             Email = model.Email,
         }, model.Password);

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace API.Application_.Repositories.RestaurantOwner
 {
 
-    public class Unutma
+    public interface IRestaurantOwnerReadRepository : IReadRepository<Domain.Entities.RestaurantOwner>
     {
-        // TODO: Bu kullanıcıları nasıl yapılandırılacak bak kesin!!
     }
 }

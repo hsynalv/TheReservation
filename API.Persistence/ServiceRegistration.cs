@@ -1,17 +1,21 @@
 ﻿using API.Application_.Abstractions.Services;
 using API.Application_.Abstractions.Services.Authentication;
+using API.Application_.Repositories.Customer;
 using API.Application_.Repositories.Dish;
 using API.Application_.Repositories.Menu;
 using API.Application_.Repositories.Reservation;
 using API.Application_.Repositories.Restaurant;
+using API.Application_.Repositories.RestaurantOwner;
 using API.Application_.Repositories.Review;
 using API.Domain.Entities.Identity;
 using API.Persistence.Context;
 using API.Persistence.CustomValidation;
+using API.Persistence.Repositories.Customer;
 using API.Persistence.Repositories.Dish;
 using API.Persistence.Repositories.Menu;
 using API.Persistence.Repositories.Reservation;
 using API.Persistence.Repositories.Restaurant;
+using API.Persistence.Repositories.RestaurantOwner;
 using API.Persistence.Repositories.Review;
 using API.Persistence.Services;
 using Microsoft.AspNetCore.Identity;
@@ -61,6 +65,11 @@ namespace API.Persistence
             services.AddScoped<IMenuWriteRepository, MenuWriteRepository>();
             services.AddScoped<IDishReadRepository, DishReadRepository>();
             services.AddScoped<IDishWriteRepository, DishWriteRepository>();
+            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddScoped<IRestaurantOwnerReadRepository, RestaurantOwnerReadRepository>();
+            services.AddScoped<IRestaurantOwnerWriteRepository, RestaurantOwnerWriteRepository>();
+
 
         }
 
