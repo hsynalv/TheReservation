@@ -23,12 +23,12 @@ namespace API.Persistence.Configurations
 
             // Relationships
             builder.HasMany(c => c.Reservations)
-                .WithOne(r => r.User)
+                .WithOne(r => r.Customer)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(c => c.Reviews)
-                .WithOne(r => r.User)
+                .WithOne(r => r.Customer)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }

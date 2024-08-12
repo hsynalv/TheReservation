@@ -1,6 +1,6 @@
-﻿using API.Application_.Features.Command.RestaurantOwner.UpdateRestaurantOwner;
+﻿using API.Application_.Features.Command.RestaurantOwner.UpdateProfilePicture;
+using API.Application_.Features.Command.RestaurantOwner.UpdateRestaurantOwner;
 using API.Application_.Features.Queries.RestuarantOwner.GetAllRestaurantOwner;
-using API.Application_.Features.Queries.RestuarantOwner.UpdateProfilePicture;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

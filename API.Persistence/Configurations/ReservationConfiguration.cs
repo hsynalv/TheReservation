@@ -20,7 +20,7 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
             .IsRequired();
 
         // Relationships
-        builder.HasOne(res => res.User)
+        builder.HasOne(res => res.Customer)
             .WithMany(u => u.Reservations)
             .HasForeignKey(res => res.UserId)
             .OnDelete(DeleteBehavior.Cascade);

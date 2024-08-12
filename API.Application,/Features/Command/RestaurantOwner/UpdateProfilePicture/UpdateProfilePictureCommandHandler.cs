@@ -6,7 +6,7 @@ using API.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Application_.Features.Queries.RestuarantOwner.UpdateProfilePicture
+namespace API.Application_.Features.Command.RestaurantOwner.UpdateProfilePicture
 {
     public class UpdateRestaurantOwnerProfilePictureCommandHandler : IRequestHandler<UpdateRestaurantOwnerProfilePictureCommandRequest, ResultDto>
     {
@@ -20,14 +20,14 @@ namespace API.Application_.Features.Queries.RestuarantOwner.UpdateProfilePicture
         public async Task<ResultDto> Handle(UpdateRestaurantOwnerProfilePictureCommandRequest request, CancellationToken cancellationToken)
         {
 
-            RestaurantOwner entity =
+            Domain.Entities.RestaurantOwner entity =
                 await _repository.Table.FirstOrDefaultAsync(x => x.AppUser.UserName == request.username);
             entity.ProfilePicture = request.url;
 
             entity.UpdatedDate = DateTime.UtcNow.ToLocalTime();
 
             _repository.Update(entity);
-            var result =await _repository.SaveAsync();
+            var result = await _repository.SaveAsync();
             if (result < 1)
                 throw new UpdateException();
             return new()

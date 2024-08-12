@@ -20,7 +20,7 @@ public class ReviewConfiguration : IEntityTypeConfiguration<Review>
             .HasMaxLength(1000);
 
         // Relationships
-        builder.HasOne(rv => rv.User)
+        builder.HasOne(rv => rv.Customer)
             .WithMany(u => u.Reviews)
             .HasForeignKey(rv => rv.UserId)
             .OnDelete(DeleteBehavior.Cascade);

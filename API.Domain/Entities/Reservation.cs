@@ -10,6 +10,6 @@ public class Reservation : BaseEntity
     public string RestaurantId { get; set; }
 
     // Navigation Properties
-    public Customer? User { get; set; }
+    public Customer? Customer { get; set; }
     public Restaurant? Restaurant { get; set; }
 }
