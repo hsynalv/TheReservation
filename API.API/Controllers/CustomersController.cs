@@ -1,4 +1,6 @@
-﻿using API.Application_.Features.Command.Customer.UpdateProfilePicture;
+﻿using API.Application_.Features.Command.Customer.UpdateCustomer;
+using API.Application_.Features.Command.Customer.UpdateProfilePicture;
+using API.Application_.Features.Queries.Customer.GetAllCustomer;
 using API.Application_.Features.Queries.Customer.GetCustomer;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -29,11 +31,25 @@ namespace API.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut("[action]")]
         public async Task<IActionResult> UpdatePhoto(UpdateProfilePictureCommandRequest request)
         {
             var result = await _mediator.Send(request);
             return Ok(result);
+        }
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> UpdateCustomer(UpdateCustomerCommandRequest request)
+        {
+            var result = await _mediator.Send(request);
+            return Ok(result);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAll()
+        {
+            var list = await _mediator.Send(new GetAllCustomerQueriesRequest());
+            return Ok(list);
         }
     }
 }

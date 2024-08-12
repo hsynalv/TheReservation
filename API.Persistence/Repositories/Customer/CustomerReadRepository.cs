@@ -19,22 +19,6 @@ namespace API.Persistence.Repositories.Customer
 
         public async Task<GetCustomerDto> GetCustomerAsync(string username)
         {
-            // Customer ve AppUser tablosunu join ederek gerekli verileri çekiyoruz
-            //var customer = await Table
-            //    .Where(c => c.Id == customerId)
-            //    .Select(c => new GetCustomerQueryResponse
-            //    {
-            //        Id = c.Id,
-            //        UserName = c.AppUser.UserName,
-            //        Email = c.AppUser.Email,
-            //        CreatedDate = c.AppUser.CreatedDate,
-            //        ProfilePicture = c.ProfilePicture,
-            //        Score = c.Score
-            //    })
-            //    .FirstOrDefaultAsync();
-
-            //return customer;
-
 
             var customer = await Table
                 .Where(c => c.AppUser.UserName == username)
@@ -44,11 +28,37 @@ namespace API.Persistence.Repositories.Customer
                 UserName = c.AppUser.UserName,
                 Email = c.AppUser.Email,
                 ProfilePicture = c.ProfilePicture,
-                Score = c.Score
+                Score = c.Score,
+                LastName = c.Lastname,
+                Name = c.Name,
+                BirthDay = c.BirthDate,
+                PhoneNumber = c.AppUser.PhoneNumber
             })
                 .FirstOrDefaultAsync();
 
             return customer;
         }
+
+        public async Task<List<GetCustomerDto>> GetAllCustomersAsync()
+        {
+            var customers = await Table
+                .Include(c => c.AppUser) // AppUser'ı sorguya dahil edin
+                .Select(c => new GetCustomerDto
+                {
+                    Id = c.Id,
+                    UserName = c.AppUser.UserName,
+                    Email = c.AppUser.Email,
+                    ProfilePicture = c.ProfilePicture,
+                    Score = c.Score,
+                    LastName = c.Lastname,
+                    Name = c.Name,
+                    BirthDay = c.BirthDate,
+                    PhoneNumber = c.AppUser.PhoneNumber
+                })
+                .ToListAsync();
+
+            return customers;
+        }
+
     }
 }
