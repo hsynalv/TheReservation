@@ -1,4 +1,5 @@
 ﻿using API.Application_.Features.Command.RestaurantOwner.UpdateRestaurantOwner;
+using API.Application_.Features.Queries.RestuarantOwner.GetAllRestaurantOwner;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,25 @@ namespace API.API.Controllers
         public async Task<IActionResult> UpdateRestaurantOwner(UpdateRestaurantOwnerCommandRequest request)
         {
             var result = await _mediator.Send(request);
+            return Ok(result);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAll()
+        {
+            var list = await _mediator.Send(new GetAllRestaurantOwnerQueriesRequest());
+            return Ok(list);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetCustomer(string username)
+        {
+            var request = new GetRestaurantOwnerQueriesRequest()
+            {
+                UserName = username
+            };
+
+            var result = await  _mediator.Send(request);
             return Ok(result);
         }
     }
