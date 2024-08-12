@@ -1,5 +1,6 @@
 ﻿using API.Application_.Features.Command.RestaurantOwner.UpdateRestaurantOwner;
 using API.Application_.Features.Queries.RestuarantOwner.GetAllRestaurantOwner;
+using API.Application_.Features.Queries.RestuarantOwner.UpdateProfilePicture;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,7 @@ namespace API.API.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetCustomer(string username)
+        public async Task<IActionResult> GetRestaurantOwner(string username)
         {
             var request = new GetRestaurantOwnerQueriesRequest()
             {
@@ -40,6 +41,13 @@ namespace API.API.Controllers
             };
 
             var result = await  _mediator.Send(request);
+            return Ok(result);
+        }
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> UpdatePhoto(UpdateRestaurantOwnerProfilePictureCommandRequest request)
+        {
+            var result = await _mediator.Send(request);
             return Ok(result);
         }
     }
