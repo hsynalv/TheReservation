@@ -1,4 +1,5 @@
-﻿using API.Application_.Features.Command.AppUser.CreateUser;
+﻿using API.Application_.DTOs;
+using API.Application_.Features.Command.AppUser.CreateUser;
 using API.Application_.Features.Command.AppUser.GoogleLogin;
 using API.Application_.Features.Command.AppUser.LoginUser;
 using API.Application_.Features.Command.AppUser.PasswordReset;
@@ -24,7 +25,7 @@ public class AuthController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateUser(CreateUserCommandRequest createUserCommandRequest)
     {
-        CreateUserCommandResponse response = await _mediator.Send(createUserCommandRequest);
+        ResultDto response = await _mediator.Send(createUserCommandRequest);
         return Ok(response);
     }
 

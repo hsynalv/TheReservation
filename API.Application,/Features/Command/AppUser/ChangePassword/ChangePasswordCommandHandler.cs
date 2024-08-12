@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Application_.Abstractions.Services;
+using API.Application_.DTOs;
 
 namespace API.Application_.Features.Command.AppUser.ChangePassword
 {
-    public class ChangePasswordCommandHandler: IRequestHandler<ChangePasswordCommandRequest, ChangePasswordCommandResponse>
+    public class ChangePasswordCommandHandler: IRequestHandler<ChangePasswordCommandRequest, ResultDto>
     {
         readonly IUserService _userService;
 
@@ -18,7 +19,7 @@ namespace API.Application_.Features.Command.AppUser.ChangePassword
             _userService = userService;
         }
 
-        public async Task<ChangePasswordCommandResponse> Handle(ChangePasswordCommandRequest request, CancellationToken cancellationToken)
+        public async Task<ResultDto> Handle(ChangePasswordCommandRequest request, CancellationToken cancellationToken)
         {
             Domain.Entities.Identity.AppUser user = await _userService.GetUser(request.Username);
             bool result = await _userService.ChangePassword(user, request.CurrentPassword, request.NewPassword);

@@ -5,6 +5,10 @@ namespace API.Domain.Entities;
 
 public class RestaurantOwner : BaseEntity
 {
+    public string? Name { get; set; }
+
+    public string? LastName { get; set; }
+
     // Navigation Properties
     public ICollection<Restaurant>? Restaurants { get; set; }
 

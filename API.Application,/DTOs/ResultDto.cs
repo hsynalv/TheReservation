@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.Application_.Features.Command.AppUser.CreateUser
+namespace API.Application_.DTOs
 {
-    public class CreateUserCommandResponse
+    public class ResultDto
     {
         public bool Succeeded { get; set; }
         public string Message { get; set; }
-
     }
 }

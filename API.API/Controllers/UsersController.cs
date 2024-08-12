@@ -1,4 +1,5 @@
-﻿using API.Application_.Features.Command.AppUser.ChangePassword;
+﻿using API.Application_.DTOs;
+using API.Application_.Features.Command.AppUser.ChangePassword;
 using API.Application_.Features.Command.AppUser.CreateUser;
 using API.Application_.Features.Command.AppUser.GoogleLogin;
 using API.Application_.Features.Command.AppUser.LoginUser;
@@ -23,7 +24,7 @@ namespace API.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> ChangePassword(ChangePasswordCommandRequest request)
         {
-            ChangePasswordCommandResponse result = await _mediator.Send(request);
+            ResultDto result = await _mediator.Send(request);
             return Ok(result);
         }
 
@@ -31,7 +32,7 @@ namespace API.API.Controllers
         public async Task<IActionResult> ResetPassword(
             [FromBody] UpdatePasswordCommandRequest updatePasswordCommandRequest)
         {
-            UpdatePasswordCommandResponse response = await _mediator.Send(updatePasswordCommandRequest);
+            ResultDto response = await _mediator.Send(updatePasswordCommandRequest);
             return Ok(response);
         }
 

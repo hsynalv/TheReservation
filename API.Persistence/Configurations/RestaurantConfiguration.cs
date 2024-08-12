@@ -21,7 +21,7 @@ public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
             .IsRequired()
             .HasMaxLength(250);
 
-        builder.Property(r => r.PhoneNumber)
+        builder.Property(r => r.RestaurantPhoneNumber)
             .HasMaxLength(15);
 
         builder.Property(r => r.CuisineType)

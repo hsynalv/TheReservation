@@ -1,4 +1,5 @@
 ﻿using API.Application_.Abstractions.Services;
+using API.Application_.DTOs;
 using API.Application_.DTOs.User;
 using API.Application_.Exceptions;
 using API.Application_.Features.Command.Customer.CreateCustomer;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace API.Application_.Features.Command.AppUser.CreateUser;
 
-public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, ResultDto>
 {
     readonly IUserService _userService;
     readonly IMediator _mediator; 
@@ -20,7 +21,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest
         _mediator = mediator;
     }
 
-    public async Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
+    public async Task<ResultDto> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
     {
         CreateUserDto userDto = new()
         {
@@ -50,7 +51,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest
                     throw new Exception("Müşteri Oluşturulamadı");
             }
 
-            return new CreateUserCommandResponse
+            return new ()
             {
                 Message = response.Message,
                 Succeeded = response.Succeeded

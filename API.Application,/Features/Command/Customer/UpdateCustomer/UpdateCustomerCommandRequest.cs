@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using API.Application_.DTOs;
+using MediatR;
 
 namespace API.Application_.Features.Command.Customer.UpdateCustomer;
 
-public class UpdateCustomerCommandRequest : IRequest<UpdateCustomerCommandResponse>
+public class UpdateCustomerCommandRequest : IRequest<ResultDto>
 {
     public string username { get; set; }
     public string Name { get; set; }
