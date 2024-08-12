@@ -24,7 +24,10 @@ namespace API.Application_.Features.Command.Customer.UpdateProfilePicture
             Domain.Entities.Customer customer =
                 await _repository.Table.FirstOrDefaultAsync(x => x.AppUser.UserName == request.username);
             customer.ProfilePicture = request.url;
-            _repository.Table.Update(customer);
+
+            customer.UpdatedDate = DateTime.UtcNow.ToLocalTime();
+
+            _repository.Update(customer);
             var result =await _repository.SaveAsync();
             if (result < 1)
                 throw new Exception("Fotoğraf Yüklenirken bir hata oluştu");

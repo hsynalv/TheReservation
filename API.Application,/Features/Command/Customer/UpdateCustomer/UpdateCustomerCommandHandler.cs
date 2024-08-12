@@ -26,6 +26,7 @@ namespace API.Application_.Features.Command.Customer.UpdateCustomer
             customer.BirthDate = request.BirthDate;
             customer.Lastname = request.LastName;
             customer.Name = request.Name;
+            customer.UpdatedDate = DateTime.UtcNow.ToLocalTime();
             //customer.AppUser.UserName = request.username;
             // TODO: Kullanıcı adı değiştirmesi için AppUser in içeri eklenmesi gerekiyor.
 
