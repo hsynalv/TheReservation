@@ -8,6 +8,7 @@ namespace API.Application_.DTOs.Restaurant
 {
     public class GetRestaurantDto
     {
+        public string Id { get; set; }
         public string RestaurantName { get; set; }
         public string Address { get; set; }
         public string RestaurantPhoneNumber { get; set; }

@@ -26,6 +26,7 @@ namespace API.Application_.Features.Queries.Restaurant
 
             GetRestaurantDto response = new()
             {
+                Id = result.Id,
                 RestaurantName = result.RestaurantName,
                 RestaurantPhoneNumber = result.RestaurantPhoneNumber,
                 CuisineType = result.CuisineType,
