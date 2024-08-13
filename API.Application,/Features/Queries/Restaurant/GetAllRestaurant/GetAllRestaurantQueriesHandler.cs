@@ -1,4 +1,5 @@
 ﻿using API.Application_.DTOs.Restaurant;
+using API.Application_.DTOs.Review;
 using API.Application_.Repositories.Restaurant;
 using MediatR;
 
@@ -22,7 +23,14 @@ namespace API.Application_.Features.Queries.Restaurant.GetAllRestaurant
                     CuisineType = x.CuisineType,
                     Id = x.Id,
                     RestaurantPhoneNumber = x.RestaurantPhoneNumber,
-                    RestaurantName = x.RestaurantName
+                    RestaurantName = x.RestaurantName,
+                    Reviews = x.Reviews.Select(r => new GetRestaurantReviewDto()
+                    {
+                        Comment = r.Comment,
+                        CustomerName = r.Customer.Name + " " + r.Customer.Lastname,
+                        Id = r.Id,
+                        Rating = r.Rating
+                    }).ToList()
                 }).ToList();
 
             return Task.FromResult(result);

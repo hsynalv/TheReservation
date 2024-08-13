@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Application_.DTOs.Restaurant;
+using API.Application_.DTOs.Review;
 using API.Application_.Repositories.Restaurant;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Application_.Features.Queries.Restaurant.GetRestaurantById
 {
@@ -20,20 +22,26 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantById
 
         public async Task<GetRestaurantDto> Handle(GetRestaurantByIdQueriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.GetByIdAsync(request.Id, false);
+            var entity = await  _repository.Table.Where(x => x.Id == request.Id).Select(r => new GetRestaurantDto()
+            {
+                Reviews = r.Reviews.Select(x => new GetRestaurantReviewDto()
+                {
+                    Comment = x.Comment,
+                    CustomerName = x.Customer.Name + " " + x.Customer.Lastname,
+                    Id = x.Id,
+                    Rating = x.Rating
+                }).ToList(),
+                Address = r.Address,
+                CuisineType = r.CuisineType,
+                Id = r.Id,
+                RestaurantPhoneNumber = r.RestaurantPhoneNumber,
+                RestaurantName = r.RestaurantName,
+            }).SingleAsync();
 
             if (entity is null)
                 throw new Exception("Restaurant bulunamadı");
 
-
-            return new()
-            {
-                Id = entity.Id,
-                RestaurantPhoneNumber = entity.RestaurantPhoneNumber,
-                CuisineType = entity.CuisineType,
-                Address = entity.Address,
-                RestaurantName = entity.RestaurantName
-            };
+            return entity;
         }
     }
 }

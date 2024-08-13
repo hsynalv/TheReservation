@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Application_.DTOs.Restaurant;
+using API.Application_.DTOs.Review;
 using API.Application_.Repositories.Restaurant;
 using API.Application_.Repositories.RestaurantOwner;
 using API.Domain.Entities;
@@ -30,7 +31,14 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantByOwnerId
                 RestaurantName = result.RestaurantName,
                 RestaurantPhoneNumber = result.RestaurantPhoneNumber,
                 CuisineType = result.CuisineType,
-                Address = result.Address
+                Address = result.Address,
+                Reviews = result.Reviews.Select(r => new GetRestaurantReviewDto()
+                {
+                    Comment = r.Comment,
+                    CustomerName = r.Customer.Name + " " + r.Customer.Lastname,
+                    Id = r.Id,
+                    Rating = r.Rating
+                }).ToList()
             };
             return response;
         }
