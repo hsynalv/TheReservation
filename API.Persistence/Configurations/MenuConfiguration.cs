@@ -26,5 +26,9 @@ public class MenuConfiguration : IEntityTypeConfiguration<Menu>
             .WithOne(d => d.Menu)
             .HasForeignKey(d => d.MenuId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        // Ensure RestaurantId is not unique
+        builder.HasIndex(m => m.RestaurantId)
+            .IsUnique(false);
     }
 }

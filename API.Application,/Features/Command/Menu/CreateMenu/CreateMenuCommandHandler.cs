@@ -40,7 +40,7 @@ namespace API.Application_.Features.Command.Menu.CreateMenu
             var result = await _menuWriteRepository.SaveAsync();
 
             if (result < 1)
-               throw new Exception("Menu Eklenirken bir hata meydana geldi");
+                throw new Exception("Menu Eklenirken bir hata meydana geldi");
 
             return new() { Succeeded = true };
         }
