@@ -9,6 +9,7 @@ using API.Application_.Repositories.Restaurant;
 using API.Application_.Repositories.RestaurantOwner;
 using API.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Application_.Features.Queries.Restaurant.GetRestaurantByOwnerId
 {
@@ -23,24 +24,27 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantByOwnerId
 
         public async Task<GetRestaurantDto> Handle(GetRestaurantByOwnerIdQueriesRequest request, CancellationToken cancellationToken)
         {
-            var result = await _repository.GetSingleAsync(x => x.OwnerId == request.RestaurantOwnerId);
 
-            GetRestaurantDto response = new()
-            {
-                Id = result.Id,
-                RestaurantName = result.RestaurantName,
-                RestaurantPhoneNumber = result.RestaurantPhoneNumber,
-                CuisineType = result.CuisineType,
-                Address = result.Address,
-                Reviews = result.Reviews.Select(r => new GetRestaurantReviewDto()
+
+            var result = await _repository.Table.Where(x => x.OwnerId == request.RestaurantOwnerId).Select(r =>
+                new GetRestaurantDto()
                 {
-                    Comment = r.Comment,
-                    CustomerName = r.Customer.Name + " " + r.Customer.Lastname,
+                    Address = r.Address,
+                    CuisineType = r.CuisineType,
                     Id = r.Id,
-                    Rating = r.Rating
-                }).ToList()
-            };
-            return response;
+                    RestaurantPhoneNumber = r.RestaurantPhoneNumber,
+                    RestaurantName = r.RestaurantName,
+                    Reviews = r.Reviews.Select(re => new GetRestaurantReviewDto()
+                    {
+                        Comment = re.Comment,
+                        CustomerName = re.Customer.Name + " " + re.Customer.Lastname,
+                        Id = re.Id,
+                        Rating = re.Rating
+                    }).ToList()
+                }).SingleAsync();
+
+           
+            return result;
         }
     }
 }
