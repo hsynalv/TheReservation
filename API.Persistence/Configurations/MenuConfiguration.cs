@@ -17,10 +17,9 @@ public class MenuConfiguration : IEntityTypeConfiguration<Menu>
             .IsRequired()
             .HasMaxLength(100);
 
-        // Relationships
         builder.HasOne(m => m.Restaurant)
-            .WithOne(r => r.Menu)
-            .HasForeignKey<Menu>(m => m.RestaurantId)
+            .WithMany(r => r.Menus)
+            .HasForeignKey(m => m.RestaurantId)
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(m => m.Dishes)

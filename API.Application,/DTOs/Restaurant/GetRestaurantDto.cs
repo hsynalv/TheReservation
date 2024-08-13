@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Application_.DTOs.Menu;
 using API.Application_.DTOs.Review;
 
 namespace API.Application_.DTOs.Restaurant
@@ -15,5 +16,6 @@ namespace API.Application_.DTOs.Restaurant
         public string RestaurantPhoneNumber { get; set; }
         public string CuisineType { get; set; }
         public List<GetRestaurantReviewDto> Reviews { get; set; }
+        public List<GetMenuDto> Menus { get; set; }
     }
 }

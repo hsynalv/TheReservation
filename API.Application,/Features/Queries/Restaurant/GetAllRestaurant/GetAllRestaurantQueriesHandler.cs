@@ -1,4 +1,5 @@
-﻿using API.Application_.DTOs.Restaurant;
+﻿using API.Application_.DTOs.Menu;
+using API.Application_.DTOs.Restaurant;
 using API.Application_.DTOs.Review;
 using API.Application_.Repositories.Restaurant;
 using MediatR;
@@ -30,6 +31,11 @@ namespace API.Application_.Features.Queries.Restaurant.GetAllRestaurant
                         CustomerName = r.Customer.Name + " " + r.Customer.Lastname,
                         Id = r.Id,
                         Rating = r.Rating
+                    }).ToList(),
+                    Menus = x.Menus.Select(m => new GetMenuDto()
+                    {
+                        Name = m.Name,
+                        Id = m.Id
                     }).ToList()
                 }).ToList();
 

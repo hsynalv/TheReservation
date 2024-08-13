@@ -14,5 +14,5 @@ public class Restaurant : BaseEntity
     public RestaurantOwner? Owner { get; set; }
     public ICollection<Reservation>? Reservations { get; set; }
     public ICollection<Review>? Reviews { get; set; }
-    public Menu? Menu { get; set; } // Menu Property added
+    public ICollection<Menu>? Menus { get; set; } // Menu Property added
 }

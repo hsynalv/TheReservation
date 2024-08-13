@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Application_.DTOs.Menu;
 using API.Application_.DTOs.Restaurant;
 using API.Application_.DTOs.Review;
 using API.Application_.Repositories.Restaurant;
@@ -40,6 +41,11 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantByOwnerId
                         CustomerName = re.Customer.Name + " " + re.Customer.Lastname,
                         Id = re.Id,
                         Rating = re.Rating
+                    }).ToList(),
+                    Menus = r.Menus.Select(m => new GetMenuDto()
+                    {
+                        Name = m.Name,
+                        Id = m.Id
                     }).ToList()
                 }).SingleAsync();
 
