@@ -35,6 +35,7 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantById
                 }).ToList(),
                 Address = r.Address,
                 CuisineType = r.CuisineType,
+                AverageScore = r.AverageScore,
                 Id = r.Id,
                 RestaurantPhoneNumber = r.RestaurantPhoneNumber,
                 RestaurantName = r.RestaurantName,

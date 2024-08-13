@@ -9,6 +9,7 @@ using API.Application_.Repositories.Customer;
 using API.Application_.Repositories.Restaurant;
 using API.Application_.Repositories.Review;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Application_.Features.Command.Review.CreateReview
 {
@@ -17,12 +18,16 @@ namespace API.Application_.Features.Command.Review.CreateReview
         readonly IReviewWriteRepository _reviewWriteRepository;
         private readonly ICustomerReadRepository _customerReadRepository;
         private readonly IRestaurantReadRepository _restaurantReadRepository;
+        private readonly IRestaurantWriteRepository _restaurantWriteRepository;
+        private readonly IReviewReadRepository _reviewReadRepository;
 
-        public CreateReviewCommandHandler(IReviewWriteRepository repository, ICustomerReadRepository customerReadRepository, IRestaurantReadRepository restaurantReadRepository)
+        public CreateReviewCommandHandler(IReviewWriteRepository repository, ICustomerReadRepository customerReadRepository, IRestaurantReadRepository restaurantReadRepository, IRestaurantWriteRepository repository1, IReviewReadRepository reviewReadRepository)
         {
             _reviewWriteRepository = repository;
             _customerReadRepository = customerReadRepository;
             _restaurantReadRepository = restaurantReadRepository;
+            _restaurantWriteRepository = repository1;
+            _reviewReadRepository = reviewReadRepository;
         }
 
         public async Task<ResultDto> Handle(CreateReviewCommandRequest request, CancellationToken cancellationToken)
@@ -50,7 +55,19 @@ namespace API.Application_.Features.Command.Review.CreateReview
 
             if (result < 1)
                 throw new ReviewCreateFailedException();
+            
+
+            restaurant.AverageScore = await CalculateAverageScore(request.RestaurantId);
+            var reviewResult = _restaurantWriteRepository.Update(restaurant);
+            _restaurantWriteRepository.SaveAsync();
+
             return new() { Succeeded = true };
+        }
+
+        private async Task<double> CalculateAverageScore(string restaurantId)
+        {
+            var average =  await _reviewReadRepository.GetWhere(x => x.RestaurantId == restaurantId).AverageAsync(s => s.Rating);
+            return average;
         }
     }
 }

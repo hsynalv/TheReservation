@@ -26,6 +26,7 @@ namespace API.Application_.Features.Queries.Restaurant.GetAllRestaurant
                     Id = x.Id,
                     RestaurantPhoneNumber = x.RestaurantPhoneNumber,
                     RestaurantName = x.RestaurantName,
+                    AverageScore = x.AverageScore,
                     Reviews = x.Reviews.Select(r => new GetRestaurantReviewDto()
                     {
                         Comment = r.Comment,

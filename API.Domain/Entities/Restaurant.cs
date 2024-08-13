@@ -7,6 +7,7 @@ public class Restaurant : BaseEntity
     public string RestaurantName { get; set; }
     public string Address { get; set; }
     public string RestaurantPhoneNumber { get; set; }
+    public double AverageScore { get; set; }
     public string CuisineType { get; set; }
     public string OwnerId { get; set; }
 

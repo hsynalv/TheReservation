@@ -35,6 +35,7 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantByOwnerId
                     CuisineType = r.CuisineType,
                     Id = r.Id,
                     RestaurantPhoneNumber = r.RestaurantPhoneNumber,
+                    AverageScore = r.AverageScore,
                     RestaurantName = r.RestaurantName,
                     Reviews = r.Reviews.Select(re => new GetRestaurantReviewDto()
                     {

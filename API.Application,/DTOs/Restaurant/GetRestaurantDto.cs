@@ -15,6 +15,7 @@ namespace API.Application_.DTOs.Restaurant
         public string Address { get; set; }
         public string RestaurantPhoneNumber { get; set; }
         public string CuisineType { get; set; }
+        public double AverageScore { get; set; }
         public List<GetRestaurantReviewDto> Reviews { get; set; }
         public List<GetMenuDto> Menus { get; set; }
     }
