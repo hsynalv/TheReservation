@@ -20,6 +20,7 @@ namespace API.Persistence.Context
         }
 
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Address> Address { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Menu> Menus { get; set; }

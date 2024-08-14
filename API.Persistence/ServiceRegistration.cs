@@ -1,5 +1,6 @@
 ﻿using API.Application_.Abstractions.Services;
 using API.Application_.Abstractions.Services.Authentication;
+using API.Application_.Repositories.Address;
 using API.Application_.Repositories.Customer;
 using API.Application_.Repositories.Dish;
 using API.Application_.Repositories.Menu;
@@ -10,6 +11,7 @@ using API.Application_.Repositories.Review;
 using API.Domain.Entities.Identity;
 using API.Persistence.Context;
 using API.Persistence.CustomValidation;
+using API.Persistence.Repositories.Address;
 using API.Persistence.Repositories.Customer;
 using API.Persistence.Repositories.Dish;
 using API.Persistence.Repositories.Menu;
@@ -69,6 +71,9 @@ namespace API.Persistence
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<IRestaurantOwnerReadRepository, RestaurantOwnerReadRepository>();
             services.AddScoped<IRestaurantOwnerWriteRepository, RestaurantOwnerWriteRepository>();
+            services.AddScoped<IAddressReadRepository, AddressReadRepository>();
+            services.AddScoped<IAddressWriteRepository, AddressWriteRepository>();
+
 
 
         }

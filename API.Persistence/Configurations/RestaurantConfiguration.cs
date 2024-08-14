@@ -28,6 +28,12 @@ public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
             .HasMaxLength(100);
 
         // Relationships
+        builder.HasOne(r => r.RestaurantAddress)
+            .WithOne(a => a.Restaurant)
+            .HasForeignKey<Address>(a => a.RestaurantId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Relationships
         builder.HasOne(r => r.Owner)
             .WithMany(ro => ro.Restaurants)
             .HasForeignKey(r => r.OwnerId)
