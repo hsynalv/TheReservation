@@ -10,4 +10,5 @@ public interface IUserService
     Task UpdatePasswordAsync(string userId, string resetToken, string newPassword);
     Task<bool> ChangePassword(AppUser user, string currentPassword, string newPassword);
     Task<AppUser> GetUser(string username);
+    Task<bool> ChangePhoneNumber(AppUser user, string newPhoneNumber);
 }

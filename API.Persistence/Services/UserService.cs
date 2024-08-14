@@ -76,4 +76,16 @@ public class UserService : IUserService
             throw new UserNotFoundException("Kullanıcı adı bulunamadı");
         return user;
     }
+
+    public async Task<bool> ChangePhoneNumber(AppUser user, string newPhoneNumber)
+    {
+       var token = await _userManager.GenerateChangePhoneNumberTokenAsync(user, user.PhoneNumber);
+       var deneme = await _userManager.VerifyChangePhoneNumberTokenAsync(user, token, newPhoneNumber);
+       IdentityResult result = await _userManager.ChangePhoneNumberAsync(user, newPhoneNumber, token);
+       if (!result.Succeeded)
+           throw new UpdateException();
+       return result.Succeeded;
+
+       //TODO: Bu fonksiyon çalışmıyor.
+    }
 }

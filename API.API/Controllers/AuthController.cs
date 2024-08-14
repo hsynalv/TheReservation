@@ -1,4 +1,5 @@
 ﻿using API.Application_.DTOs;
+using API.Application_.Features.Command.AppUser.ChangePhoneNumber;
 using API.Application_.Features.Command.AppUser.CreateUser;
 using API.Application_.Features.Command.AppUser.GoogleLogin;
 using API.Application_.Features.Command.AppUser.LoginUser;
@@ -62,5 +63,12 @@ public class AuthController : ControllerBase
     {
         VerifyResetTokenCommandResponse response = await _mediator.Send(verifyResetTokenCommandRequest);
         return Ok(response);
+    }
+
+    [HttpPost("[action]")]
+    public async Task<IActionResult> ChangePhoneNumber(ChangePhoneNumberCommandRequest request)
+    {
+        var result = await _mediator.Send(request);
+        return Ok(result);
     }
 }

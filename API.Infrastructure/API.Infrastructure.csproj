@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.21.2" />
 	</ItemGroup>
 
 </Project>
