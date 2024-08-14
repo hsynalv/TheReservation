@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Application_.DTOs.Address;
 using API.Application_.DTOs.Dish;
 using API.Application_.DTOs.Menu;
 using API.Application_.DTOs.Restaurant;
 using API.Application_.DTOs.Review;
+using API.Application_.Repositories.Address;
 using API.Application_.Repositories.Restaurant;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,24 +17,20 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantById
 {
     public class GetRestaurantByIdQueriesHandler : IRequestHandler<GetRestaurantByIdQueriesRequest, GetRestaurantDto>
     {
-        readonly IRestaurantReadRepository _repository;
+        readonly IRestaurantReadRepository _restaurantReadRepository;
+        readonly IAddressReadRepository _addressReadRepository;
 
-        public GetRestaurantByIdQueriesHandler(IRestaurantReadRepository repository)
+        public GetRestaurantByIdQueriesHandler(IRestaurantReadRepository repository, IAddressReadRepository addressReadRepository)
         {
-            _repository = repository;
+            _restaurantReadRepository = repository;
+            _addressReadRepository = addressReadRepository;
         }
 
         public async Task<GetRestaurantDto> Handle(GetRestaurantByIdQueriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await  _repository.Table.Where(x => x.Id == request.Id).Select(r => new GetRestaurantDto()
+            var entity = await  _restaurantReadRepository.Table.Where(x => x.Id == request.Id).Select(r => new GetRestaurantDto()
             {
-                Reviews = r.Reviews.Select(x => new GetRestaurantReviewDto()
-                {
-                    Comment = x.Comment,
-                    CustomerName = x.Customer.Name + " " + x.Customer.Lastname,
-                    Id = x.Id,
-                    Rating = x.Rating
-                }).ToList(),
+                
                 Address = r.Address,
                 CuisineType = r.CuisineType,
                 AverageScore = r.AverageScore,
@@ -52,8 +50,25 @@ namespace API.Application_.Features.Queries.Restaurant.GetRestaurantById
                         PhotoUrl = d.PhotoUrl
                     }).ToList(),
                 }).ToList(),
+                Reviews = r.Reviews.Select(x => new GetRestaurantReviewDto()
+                {
+                    Comment = x.Comment,
+                    CustomerName = x.Customer.Name + " " + x.Customer.Lastname,
+                    Id = x.Id,
+                    Rating = x.Rating
+                }).ToList()
 
             }).SingleAsync();
+
+            entity.AddressDto = _addressReadRepository.GetWhere(x => x.RestaurantId == entity.Id).Select(a =>
+                new AddressDto()
+                {
+                    State = a.State,
+                    City = a.City,
+                    PostalCode = a.PostalCode,
+                    Street = a.Street,
+                    Country = a.Country
+                }).Single();
 
             if (entity is null)
                 throw new Exception("Restaurant bulunamadı");

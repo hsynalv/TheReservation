@@ -1,7 +1,9 @@
-﻿using API.Application_.DTOs.Dish;
+﻿using API.Application_.DTOs.Address;
+using API.Application_.DTOs.Dish;
 using API.Application_.DTOs.Menu;
 using API.Application_.DTOs.Restaurant;
 using API.Application_.DTOs.Review;
+using API.Application_.Repositories.Address;
 using API.Application_.Repositories.Restaurant;
 using MediatR;
 
@@ -9,16 +11,18 @@ namespace API.Application_.Features.Queries.Restaurant.GetAllRestaurant
 {
     public class GetAllRestaurantQueriesHandler : IRequestHandler<GetAllRestaurantQueriesRequest, List<GetRestaurantDto>>
     {
-        private readonly IRestaurantReadRepository _repository;
+        private readonly IRestaurantReadRepository _restaurantReadRepository;
+        private readonly IAddressReadRepository _addressReadRepository;
 
-        public GetAllRestaurantQueriesHandler(IRestaurantReadRepository repository)
+        public GetAllRestaurantQueriesHandler(IRestaurantReadRepository repository, IAddressReadRepository addressReadRepository)
         {
-            _repository = repository;
+            _restaurantReadRepository = repository;
+            _addressReadRepository = addressReadRepository;
         }
 
         public Task<List<GetRestaurantDto>> Handle(GetAllRestaurantQueriesRequest request, CancellationToken cancellationToken)
         {
-            var result =  _repository.GetAll(false)
+            var result =  _restaurantReadRepository.GetAll(false)
                 .Select(x => new GetRestaurantDto()
                 {
                     Address = x.Address,
@@ -46,8 +50,20 @@ namespace API.Application_.Features.Queries.Restaurant.GetAllRestaurant
                             Price = d.Price,
                             PhotoUrl = d.PhotoUrl
                         }).ToList(),
-                    }).ToList()
+                    }).ToList(),
+                    
                 }).ToList();
+
+            result.ForEach(x => 
+                x.AddressDto = _addressReadRepository.GetWhere(a => a.RestaurantId == x.Id)
+                    .Select(ax => new AddressDto()
+                {
+                        State = ax.State,
+                        City = ax.City,
+                        PostalCode = ax.PostalCode,
+                        Street = ax.Street,
+                        Country = ax.Country
+                }).Single());
 
             return Task.FromResult(result);
 

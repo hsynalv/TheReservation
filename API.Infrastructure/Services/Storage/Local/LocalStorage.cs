@@ -1,10 +1,11 @@
-﻿using API.Application_.Abstractions.Storage.Local;
+﻿using API.Application_.Abstractions.Storage;
+using API.Application_.Abstractions.Storage.Local;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace API.Infrastructure.Services.Storage.Local
 {
-    public class LocalStorage : Storage, ILocalStorage
+    public class LocalStorage : Storage, IStorage
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
 
