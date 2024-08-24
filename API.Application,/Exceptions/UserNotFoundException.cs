@@ -1,6 +1,6 @@
 ﻿namespace API.Application_.Exceptions;
 
-public class UserNotFoundException : Exception
+public class UserNotFoundException : NotFoundException
 {
     public UserNotFoundException() : base("Kullanıcı adı veya şifre hatalı.")
     {

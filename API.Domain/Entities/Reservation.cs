@@ -8,6 +8,7 @@ public class Reservation : BaseEntity
     public int GuestCount { get; set; }
     public string UserId { get; set; }
     public string RestaurantId { get; set; }
+    public string? SpecialRequest { get; set; }
 
     // Navigation Properties
     public Customer? Customer { get; set; }
