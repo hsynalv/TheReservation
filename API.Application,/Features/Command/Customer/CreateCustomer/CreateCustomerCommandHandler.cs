@@ -18,7 +18,6 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
         _repository.AddAsync(new Domain.Entities.Customer()
         {
             Id = request.Id,
-            BirthDate = request.BirthDate,
             CreatedDate = DateTime.UtcNow.ToLocalTime(),
             Name = request.Name,
             Lastname = request.LastName

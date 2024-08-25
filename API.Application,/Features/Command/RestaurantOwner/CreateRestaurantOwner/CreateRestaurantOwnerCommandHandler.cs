@@ -21,7 +21,6 @@ public class CreateRestaurantOwnerCommandHandler : IRequestHandler<CreateRestaur
             Id = request.Id,
             Name = request.Name,
             LastName = request.LastName,
-            BirthDate = request.BirthDate
         });
         
         var result = await _repository.SaveAsync();
