@@ -1,6 +1,5 @@
 ﻿using API.Application_.DTOs.Customer;
 using API.Application_.Exceptions;
-using API.Application_.Features.Queries.Customer.GetCustomer;
 using API.Application_.Repositories.Customer;
 using MediatR;
 using System;

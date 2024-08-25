@@ -11,4 +11,6 @@ public interface IUserService
     Task<bool> ChangePassword(AppUser user, string currentPassword, string newPassword);
     Task<AppUser> GetUser(string username);
     Task<bool> ChangePhoneNumber(AppUser user, string newPhoneNumber);
+
+    Task<bool> DeleteUser(string userId);
 }

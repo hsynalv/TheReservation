@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Application_.DTOs.Customer;
+using API.Application_.DTOs.Review;
 using API.Application_.Repositories.Customer;
 using MediatR;
 

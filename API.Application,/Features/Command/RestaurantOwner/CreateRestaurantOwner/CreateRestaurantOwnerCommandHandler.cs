@@ -15,7 +15,14 @@ public class CreateRestaurantOwnerCommandHandler : IRequestHandler<CreateRestaur
 
     public async Task<ResultDto> Handle(CreateRestaurantOwnerCommandRequest request, CancellationToken cancellationToken)
     {
-        _repository.Table.Add(new(){Id = request.Id, CreatedDate = DateTime.UtcNow.ToLocalTime()});
+        _repository.AddAsync(new Domain.Entities.RestaurantOwner()
+        {
+            CreatedDate = DateTime.UtcNow.ToLocalTime(),
+            Id = request.Id,
+            Name = request.Name,
+            LastName = request.LastName,
+            BirthDate = request.BirthDate
+        });
         
         var result = await _repository.SaveAsync();
         

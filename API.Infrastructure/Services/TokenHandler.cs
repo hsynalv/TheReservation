@@ -23,7 +23,7 @@ namespace API.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public Application_.DTOs.Token CreateAccessToken(int second, string username)
+        public Application_.DTOs.Token CreateAccessToken(int second, string username,string Id)
         {
             Application_.DTOs.Token token = new();
 
@@ -37,6 +37,7 @@ namespace API.Infrastructure.Services
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username), // Kullanıcı adını Claim olarak ekliyoruz
+                new Claim(JwtRegisteredClaimNames.NameId, Id), // Kullanıcı adını Claim olarak ekliyoruz
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Token ID'si (benzersiz)
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()) // Token'ın oluşturulma zamanı
             };

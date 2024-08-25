@@ -15,24 +15,20 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
 
     public async Task<ResultDto> Handle(CreateCustomerCommandRequest request, CancellationToken cancellationToken)
     {
-        _repository.Table.Add(new(){Id = request.Id, CreatedDate = DateTime.UtcNow.ToLocalTime()});
+        _repository.AddAsync(new Domain.Entities.Customer()
+        {
+            Id = request.Id,
+            BirthDate = request.BirthDate,
+            CreatedDate = DateTime.UtcNow.ToLocalTime(),
+            Name = request.Name,
+            Lastname = request.LastName
+        });
         
-
-        try
-        {
-            var result = await _repository.SaveAsync();
-        }
-        catch (Exception ex)
-        {
-            // Inner exception'ı kontrol et
-            var innerException = ex.InnerException?.Message;
-            Console.WriteLine(innerException);
-            throw;
-        }
+        var result = await _repository.SaveAsync();
 
 
-        //if (result == 0)
-        //    throw new Exception("Müşteri Eklenemedi");
+        if (result == 0) 
+            throw new Exception("Müşteri Eklenemedi");
         return new ResultDto(){Succeeded = true};
     }
 }

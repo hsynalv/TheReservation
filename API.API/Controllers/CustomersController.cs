@@ -1,7 +1,8 @@
 ﻿using API.Application_.Features.Command.Customer.UpdateCustomer;
 using API.Application_.Features.Command.Customer.UpdateProfilePicture;
 using API.Application_.Features.Queries.Customer.GetAllCustomer;
-using API.Application_.Features.Queries.Customer.GetCustomer;
+using API.Application_.Features.Queries.Customer.GetCustomerByUserId;
+using API.Application_.Features.Queries.Customer.GetCustomerByUserName;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +21,23 @@ namespace API.API.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetCustomer(string username)
+        public async Task<IActionResult> GetCustomerByUserName(string username)
         {
-            var request = new GetCustomerQueriesRequest()
+            var request = new GetCustomerByUserNameQueriesRequest()
             {
                 UserName = username
+            };
+
+            var result = await  _mediator.Send(request);
+            return Ok(result);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetCustomerByUserId(string Id)
+        {
+            var request = new GetCustomerByUserIdQueriesRequest()
+            {
+                Id = Id
             };
 
             var result = await  _mediator.Send(request);

@@ -55,7 +55,7 @@ namespace API.Persistence.Services
             {
                 await _userManager.AddLoginAsync(user, info); //AspNetUserLogins
 
-                Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user.UserName);
+                Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user.UserName, user.Id);
                 await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 15);
                 return token;
             }
@@ -89,7 +89,7 @@ namespace API.Persistence.Services
             SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
             if (result.Succeeded) //Authentication başarılı!
             {
-                Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user.UserName);
+                Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user.UserName, user.Id);
                 await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 15);
                 return token;
             }
@@ -107,7 +107,7 @@ namespace API.Persistence.Services
 
             if (user.RefreshTokenEndDate > DateTime.UtcNow.ToLocalTime())
             {
-                Token token = _tokenHandler.CreateAccessToken(30, user.UserName);
+                Token token = _tokenHandler.CreateAccessToken(30, user.UserName, user.Id);
                 await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 15);
                 return token;
             }

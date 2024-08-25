@@ -38,17 +38,35 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest
             if (request.UserType == true) // Customer
             {
                 var customer = new Domain.Entities.Customer { Id = userDto.id};
-                var result = await _mediator.Send(new CreateCustomerCommandRequest() { Id = userDto.id });
+                var result = await _mediator.Send(new CreateCustomerCommandRequest()
+                {
+                    Id = userDto.id,
+                    LastName = request.LastName,
+                    Name = request.Name
+                });
 
                 if (!result.Succeeded)
+                {
+                    _userService.DeleteUser(userDto.id);
                     throw new Exception("Müşteri Oluşturulamadı");
+                }
+                    
             }
             else
             {
-                var result = await _mediator.Send(new CreateRestaurantOwnerCommandRequest() { Id = userDto.id });
+                var result = await _mediator.Send(new CreateRestaurantOwnerCommandRequest()
+                {
+                    Id = userDto.id,
+                    LastName = request.LastName,
+                    Name = request.Name
+                });
 
                 if (!result.Succeeded)
-                    throw new Exception("Müşteri Oluşturulamadı");
+                {
+                    _userService.DeleteUser(userDto.id);
+                    throw new Exception("Restoran Sahibi Oluşturulamadı");
+                }
+
             }
 
             return new ()

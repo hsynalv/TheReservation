@@ -8,7 +8,7 @@ namespace API.Application_.Abstractions.Token
 {
     public interface ITokenHandler
     {
-        DTOs.Token CreateAccessToken(int second, string username);
+        DTOs.Token CreateAccessToken(int second, string username, string Id);
         string CreateRefreshToken();
     }
 }

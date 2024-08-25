@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Application_.DTOs.Review;
 
 namespace API.Application_.DTOs.Customer
 {
@@ -17,5 +18,6 @@ namespace API.Application_.DTOs.Customer
         public string? PhoneNumber { get; set; }
         public string? ProfilePicture { get; set; }
         public decimal? Score { get; set; }
+        public List<GetUserReviewDto> Reviews { get; set; }
     }
 }

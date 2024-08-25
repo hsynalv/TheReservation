@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Application_.DTOs;
 using API.Application_.Exceptions;
-using API.Application_.Features.Queries.Customer.GetCustomer;
 using API.Application_.Repositories.Customer;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

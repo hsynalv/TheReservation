@@ -88,4 +88,20 @@ public class UserService : IUserService
 
        //TODO: Bu fonksiyon çalışmıyor.
     }
+
+    public async Task<bool> DeleteUser(string userId)
+    {
+        AppUser user = await _userManager.FindByIdAsync(userId);
+
+        if (user is not null)
+        {
+            IdentityResult result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return result.Succeeded;
+            return false;
+        }
+
+        return false;
+
+    }
 }
